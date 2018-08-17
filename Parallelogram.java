@@ -1,10 +1,16 @@
 public class Parallelogram implements IQuadrilateral {
-    private double breadth, height, angle;
+    // Fields
+    // -------------------------------
+    private double breadth, height, angle, area, perimeter;
 
+    // Public methods
+    // -------------------------------
     public Parallelogram(double breadth, double height, double angle) {
         this.breadth = breadth;
         this.height = height;
         this.angle = angle;
+        calculateArea();
+        calculatePerimeter();
     }
 
     public double getHeight() {
@@ -31,19 +37,33 @@ public class Parallelogram implements IQuadrilateral {
         this.angle = angle;
     }
 
+    // Overrides
+    // -------------------------------
     @Override
     public double getArea() {
-        return breadth * height * Math.sin(Math.toRadians(angle));
+        return area;
     }
 
     @Override
     public double getPerimeter() {
-        return 2 * (breadth + height);
+        return perimeter;
     }
 
     @Override
     public void resize(float factor) {
         this.breadth = factor * breadth;
         this.height = factor * height;
+        calculateArea();
+        calculatePerimeter();
+    }
+
+    // Private methods
+    // -------------------------------
+    private void calculateArea() {
+        area = breadth * height * Math.sin(Math.toRadians(angle));
+    }
+
+    private void calculatePerimeter() {
+        perimeter = 2 * (breadth + height);
     }
 }

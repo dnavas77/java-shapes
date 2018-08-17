@@ -1,10 +1,16 @@
 public class RightTriangle implements ITriangle {
-    private double legA, legB, hypotenuse;
+    // Fields
+    // -------------------------------
+    private double legA, legB, hypotenuse, area, perimeter;
 
+    // Public methods
+    // -------------------------------
     public RightTriangle(double legA, double legB) {
         this.legA = legA;
         this.legB = legB;
         this.hypotenuse = Math.sqrt(Math.pow(legA,2) + Math.pow(legB,2));
+        calculateArea();
+        calculatePerimeter();
     }
 
     public double getLegA() {
@@ -23,14 +29,16 @@ public class RightTriangle implements ITriangle {
         this.legB = legB;
     }
 
+    // Overrides
+    // -------------------------------
     @Override
     public double getArea() {
-        return 0.5 * legA * legB;
+        return area;
     }
 
     @Override
     public double getPerimeter() {
-        return legA + legB + hypotenuse;
+        return perimeter;
     }
 
     @Override
@@ -38,5 +46,17 @@ public class RightTriangle implements ITriangle {
         this.legA = factor * legA;
         this.legB = factor * legB;
         this.hypotenuse = factor * hypotenuse;
+        calculateArea();
+        calculatePerimeter();
+    }
+
+    // Overrides
+    // -------------------------------
+    private void calculateArea() {
+        area = 0.5 * legA * legB;
+    }
+
+    private void calculatePerimeter() {
+        perimeter = legA + legB + hypotenuse;
     }
 }

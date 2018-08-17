@@ -1,8 +1,14 @@
 public class Circle implements IShape {
-    private double radius;
+    // Fields
+    // --------------------------------
+    private double radius, area, perimeter;
 
+    // Public methods
+    // --------------------------------
     public Circle(double radius) {
         this.radius = radius;
+        calculateArea();
+        calculatePerimeter();
     }
 
     public double getRadius() {
@@ -13,18 +19,32 @@ public class Circle implements IShape {
         this.radius = radius;
     }
 
+    // Overrides
+    // --------------------------------
     @Override
     public double getArea() {
-        return Math.pow(radius, 2) * Math.PI;
+        return area;
     }
 
     @Override
     public double getPerimeter() {
-        return 2 * Math.PI * radius;
+        return perimeter;
     }
 
     @Override
     public void resize(float factor) {
         this.radius = radius * factor;
+        calculateArea();
+        calculatePerimeter();
+    }
+
+    // Private methods
+    // --------------------------------
+    private void calculateArea() {
+        area = Math.pow(radius, 2) * Math.PI;
+    }
+
+    private void calculatePerimeter() {
+        perimeter = 2 * Math.PI * radius;
     }
 }

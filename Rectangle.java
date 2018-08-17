@@ -1,9 +1,15 @@
 public class Rectangle implements IQuadrilateral {
-    private double length, width;
+    // Fields
+    // -------------------------------
+    private double length, width, area, perimeter;
 
+    // Public methods
+    // -------------------------------
     public Rectangle(double length, double width) {
         this.length = length;
         this.width = width;
+        calculateArea();
+        calculatePerimeter();
     }
 
 	public double getWidth() {
@@ -22,19 +28,33 @@ public class Rectangle implements IQuadrilateral {
         this.length = length;
     }
 
+    // Overrides
+    // -------------------------------
 	@Override
 	public double getArea() {
-		return length * width;
+		return area;
 	}
 
 	@Override
 	public double getPerimeter() {
-		return 2 * (length + width);
+		return perimeter;
 	}
 
 	@Override
 	public void resize(float factor) {
 		setLength(factor * length);
 		setWidth(factor * width);
+        calculateArea();
+        calculatePerimeter();
 	}
+
+    // Private methods
+    // -------------------------------
+    private void calculateArea() {
+        area = length * width;
+    }
+
+    private void calculatePerimeter() {
+        perimeter = 2 * (length + width);
+    }
 }
